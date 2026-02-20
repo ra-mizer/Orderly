@@ -1,4 +1,4 @@
-# Code Review Standards (Team Agreement)
+# Code Review Standards
 
 **Purpose:** Establish consistent code review expectations so we maintain high code quality, reduce defects, and share knowledge across the team.
 
@@ -16,10 +16,9 @@ Code reviews should help us:
 
 ## 2. Review Workflow (Required)
 1. **Create a branch** for work (feature/bugfix)
-2. Open a **Pull Request (PR)** to merge into `dev` (or `main` if no dev branch)
+2. Open a **Pull Request (PR)** to merge into `main`
 3. PR must include a clear description and any screenshots/notes needed
-4. At least **1 approval** is required before merge  
-   - For larger changes, aim for **2 approvals** when possible
+4. At least **1 approval** is recommended before merge  
 5. PR must pass required checks (build/tests/lint) if configured
 6. **Squash merge** is preferred to keep history clean (unless the team decides otherwise)
 
