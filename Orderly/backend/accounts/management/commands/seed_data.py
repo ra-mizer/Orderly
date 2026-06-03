@@ -231,14 +231,6 @@ class Command(BaseCommand):
         )
         self.stdout.write(self.style.SUCCESS("Support account seeded: supportuser"))
 
-        # Store manager users
-        for i in range(1, 4):
-            u = make_user(f"manager{i}", f"manager{i}@example.com")
-            UserRole.objects.get_or_create(
-                user=u,
-                defaults={"role": UserRoleChoices.STORE_MANAGER},
-            )
-
         # Customer users
         customers = [
             {
@@ -361,7 +353,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("Personal customer account seeded: Rachel"))
 
         self.stdout.write(
-            self.style.SUCCESS("Users seeded: 3 store managers, 6 customers + dev + personal")
+            self.style.SUCCESS("Users seeded: 6 customers + dev + personal")
         )
 
         # ------------------------------------------------------------
@@ -1389,16 +1381,6 @@ class Command(BaseCommand):
                 if changed:
                     obj.save()
             locations[num] = obj
-
-        # Assign managers to locations
-        for i, loc_num in enumerate([1, 2, 3], start=1):
-            User = get_user_model()
-            mgr_user = User.objects.filter(username=f"manager{i}").first()
-            if mgr_user:
-                role = UserRole.objects.filter(user=mgr_user).first()
-                if role and role.store_id != locations[loc_num].pk:
-                    role.store = locations[loc_num]
-                    role.save(update_fields=["store"])
 
         self.stdout.write(self.style.SUCCESS(f"Locations seeded: {len(location_rows)} locations in 2 regions"))
 
